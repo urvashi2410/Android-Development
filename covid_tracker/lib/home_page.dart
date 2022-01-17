@@ -217,12 +217,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: PieChart(
                     chartValuesOptions:
                         ChartValuesOptions(showChartValuesInPercentage: true),
@@ -234,18 +234,67 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: EdgeInsets.all(8),
-                  child: PieChart(dataMap: {
-                    'Active Cases': activeCasesInWorld.toDouble(),
-                    current: activeCasesOfThatCountry / 1000.toDouble(),
-                  }),
-                ),
-              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Column(
+                        children: [
+                          Text(
+                            'Active Cases',
+                            style: TextStyle(
+                                color: black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          PieChart(
+                            chartValuesOptions: ChartValuesOptions(
+                                showChartValuesInPercentage: true),
+                            chartRadius:
+                                MediaQuery.of(context).size.width / 3.5,
+                            legendOptions: LegendOptions(showLegends: false),
+                            chartType: ChartType.ring,
+                            dataMap: {
+                              "world": activeCasesInWorld.toDouble(),
+                              current:
+                                  activeCasesOfThatCountry / 1000.toDouble()
+                            },
+                          ),
+                        ],
+                      )),
+                      Expanded(
+                          child: Column(
+                        children: [
+                          Text(
+                            'Total Cases',
+                            style: TextStyle(
+                                color: black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          PieChart(
+                            chartValuesOptions: ChartValuesOptions(
+                                showChartValuesInPercentage: true),
+                            chartRadius:
+                                MediaQuery.of(context).size.width / 3.5,
+                            legendOptions: LegendOptions(showLegends: false),
+                            chartType: ChartType.ring,
+                            dataMap: {
+                              "world": totalCasesInWorld.toDouble(),
+                              current:
+                                  totalCasesOfThatCountry / 1000.toDouble()
+                            },
+                          ),
+                        ],
+                      )),
+                    ],
+                  )),
               SizedBox(
                 height: 18,
               ),
